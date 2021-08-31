@@ -25,7 +25,7 @@ class User
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
@@ -90,12 +90,12 @@ class User
     private $registrationDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=post::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
      */
     private $post;
 
     /**
-     * @ORM\OneToMany(targetEntity=followers::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Followers::class, mappedBy="user")
      */
     private $followers;
 
@@ -109,12 +109,18 @@ class User
      */
     private $subscription;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dob;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
         $this->followers = new ArrayCollection();
         $this->saved_post = new ArrayCollection();
         $this->subscription = new ArrayCollection();
+        $this->registrationDate = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -406,6 +412,18 @@ class User
                 $subscription->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDob(): ?\DateTimeInterface
+    {
+        return $this->dob;
+    }
+
+    public function setDob(\DateTimeInterface $dob): self
+    {
+        $this->dob = $dob;
 
         return $this;
     }

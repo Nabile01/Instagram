@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Website_url</th>
+                <th>Bio</th>
+                <th>Mail</th>
+                <th>Phone_number</th>
+                <th>Gender</th>
+                <th>Thumbnail</th>
+                <th>Id_post</th>
+                <th>Password</th>
+                <th>Id_saved_posts</th>
+                <th>Id_folowers</th>
+                <th>Id_subscription</th>
+                <th>RegistrationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.websiteUrl }}</td>
+                <td>{{ user.bio }}</td>
+                <td>{{ user.mail }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.thumbnail }}</td>
+                <td>{{ user.idPost }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.idSavedPosts }}</td>
+                <td>{{ user.idFolowers }}</td>
+                <td>{{ user.idSubscription }}</td>
+                <td>{{ user.registrationDate ? user.registrationDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Create new</a>
+{% endblock %}
