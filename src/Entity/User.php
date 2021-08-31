@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,7 +40,7 @@ class User
     private $bio;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $mail;
 
@@ -86,6 +88,34 @@ class User
      * @ORM\Column(type="date")
      */
     private $registrationDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity=post::class, mappedBy="user")
+     */
+    private $post;
+
+    /**
+     * @ORM\OneToMany(targetEntity=followers::class, mappedBy="user")
+     */
+    private $followers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=SavedPost::class, mappedBy="user")
+     */
+    private $saved_post;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="user")
+     */
+    private $subscription;
+
+    public function __construct()
+    {
+        $this->post = new ArrayCollection();
+        $this->followers = new ArrayCollection();
+        $this->saved_post = new ArrayCollection();
+        $this->subscription = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -256,6 +286,126 @@ class User
     public function setRegistrationDate(\DateTimeInterface $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|post[]
+     */
+    public function getPost(): Collection
+    {
+        return $this->post;
+    }
+
+    public function addPost(post $post): self
+    {
+        if (!$this->post->contains($post)) {
+            $this->post[] = $post;
+            $post->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(post $post): self
+    {
+        if ($this->post->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|followers[]
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(followers $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+            $follower->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(followers $follower): self
+    {
+        if ($this->followers->removeElement($follower)) {
+            // set the owning side to null (unless already changed)
+            if ($follower->getUser() === $this) {
+                $follower->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SavedPost[]
+     */
+    public function getSavedPost(): Collection
+    {
+        return $this->saved_post;
+    }
+
+    public function addSavedPost(SavedPost $savedPost): self
+    {
+        if (!$this->saved_post->contains($savedPost)) {
+            $this->saved_post[] = $savedPost;
+            $savedPost->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSavedPost(SavedPost $savedPost): self
+    {
+        if ($this->saved_post->removeElement($savedPost)) {
+            // set the owning side to null (unless already changed)
+            if ($savedPost->getUser() === $this) {
+                $savedPost->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscription(): Collection
+    {
+        return $this->subscription;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscription->contains($subscription)) {
+            $this->subscription[] = $subscription;
+            $subscription->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscription->removeElement($subscription)) {
+            // set the owning side to null (unless already changed)
+            if ($subscription->getUser() === $this) {
+                $subscription->setUser(null);
+            }
+        }
 
         return $this;
     }

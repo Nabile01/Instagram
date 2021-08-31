@@ -27,6 +27,11 @@ class SavedPost
      */
     private $id_post;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="saved_post")
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class SavedPost
     public function setIdPost(int $id_post): self
     {
         $this->id_post = $id_post;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
