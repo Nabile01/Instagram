@@ -1,9 +1,33 @@
 {% block body %}
-<div class="sprite"></div>
-<p>Inscrivez-vous pour voir les photos et vidéos de vos amis.</p>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<button class="btn">{{ button_label|default('Save') }}</button>
+<div class="inputBox1">
+    <div class="sprite logo"></div>
+    <h2>Inscrivez-vous pour voir les photos et vidéos de vos amis.</h2>
+    <div class="fb"><a href="https://fr-fr.facebook.com/">
+            <div class="sprite fbLogo"></div> Se connecter avec Facebook
+        </a></div>
+    <div class="ou">
+        <div class="leftline"></div>
+        <p>OU</p>
+        <div class="rightline"></div>
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.mail, {'attr': {'placeholder': "E-mail"}}) }}
+    {{ form_row(form.name, {'attr': {'placeholder': "Nom complet"}}) }}
+    {{ form_row(form.username, {'attr': {'placeholder': "Nom d'utilisateur"}}) }}
+    {{ form_row(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
+    <button type="button">Suivant</button>
+    <p>En vous inscrivant, vous acceptez nos <a href="https://help.instagram.com/581066165581870">Conditions
+            générales</a>. Découvrez comment nous recueillons, utilisons et
+        partageons vos données en lisant notre <a href="https://help.instagram.com/519522125107875">Politique
+            d’utilisation des données</a> et comment nous utilisons les
+        cookies
+        et autres technologies similaires en consultant notre <a
+            href="https://www.instagram.com/legal/cookies/">Politique d’utilisation des cookies.</a></p>
+</div>
+<div class="inputBox2">
+    {{ form_row(form.dob)}}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+</div>
 {{ form_end(form) }}
 
 {% endblock %}

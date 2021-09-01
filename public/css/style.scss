@@ -1,5 +1,4 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -42,8 +41,205 @@ table {
 	border-spacing: 0;
 }
 
-.sprite {
+a {
+	text-decoration: none;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../assets/font/Segoe UI.woff2') format('woff2'),
+		 url('../assets/font/Segoe UI.woff') format('woff'),
+		 url('../assets/font/Segoe_UI.ttf')  format('truetype');
+}
+
+//--------------SPRITE
+.logo {
     background: url('../assets/IconSprite.png') no-repeat 0 -130px;
 	width: 175px;
 	height: 51px;
+	margin: 22px auto 12px;
+}
+
+.fbLogo {
+	background: url('../assets/IconSprite.png') no-repeat -414px -300px;
+	width: 16px;
+	height: 16px;
+}
+
+@mixin btnColorOk {
+	background-color: #0095F6;
+	border-radius: 4px;
+	margin: 8px 40px;
+	padding: 5px 9px;
+	color: white;
+	border: 1px solid transparent;
+}
+
+@mixin btnColor {
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: #B2DFFC;
+	margin: 9px 40px;
+	padding: 5px 9px;
+	color: #FFFFFF;
+}
+
+body {
+	background:#FAFAFA;
+	font-family: 'Segoe UI', sans-serif;
+}
+
+section.signup {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	height: 100vh;
+	
+	div.formWrapper {
+		background: white;
+		width: 350px;
+		border: 1px rgba(219,219,219,1) solid;
+		border-radius: 1px;
+		margin: 0 0 10px;
+		padding: 10px 0;
+
+		h2 {
+			font-size: 17px;
+			font-weight: 600;
+			line-height: 20px;
+			margin: 0 40px 10px;
+			text-align: center;
+			color: rgba(142,142,142,1);
+		}
+
+
+		.inputBox1 {
+			
+			.ou {
+				margin: 18px 40px 18px;
+				p {
+					font-size: 14px;
+					font-weight: 600;
+					position: relative;
+
+					&::before {
+						position: absolute;
+						content: "";
+						height: 1px;
+						width: 55%;
+						background-color: rgb(161, 161, 161);
+						display: block;
+						top: 7px;
+						left: -40px;
+					}
+
+					&::after {
+						position: absolute;
+						content: "";
+						height: 1px;
+						width: 55%;
+						background-color: rgb(161, 161, 161);
+						display: block;
+						top: 7px;
+						right: -40px;
+					}
+				}
+			}
+
+			p {
+				text-align: center;
+				color: rgba(142,142,142,1);
+				font-size: 12px;
+				margin: 10px 40px;
+				line-height: 16px;
+
+				a {
+					color: rgba(142,142,142,1);
+					font-weight: 600;
+				}
+			}
+
+			.fb {
+				width: 100%;
+				
+				a {
+					display: flex;
+					justify-content: center;
+					align-content: center;
+					text-decoration: none;
+					@include btnColorOk;
+					font-size: 14px;
+					line-height: 21px;
+
+					div {
+						margin: 0 5px;
+					}
+				}
+			}
+
+			form {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				label {
+					display: none;
+				}
+
+				input {
+					font-family: 'Segoe UI', sans-serif;
+					background-color: #FAFAFA;					
+					padding: 9px 0 7px 8px;
+					text-overflow: ellipsis;
+					border: 1px rgba(219,219,219,1) solid;
+					border-radius: 2px;
+					width: 250px;
+					margin: 3px 0px;
+					padding: 9px;
+				}
+			}
+
+			button {
+				@include btnColor;
+				width: 270px;
+			}
+		}
+
+		.inputBox2 {
+			background-color: red;
+			label {
+				display: none;
+			}
+			display: none;
+		}
+	}
+
+	.login {
+		background-color: white;
+		border: 1px rgba(219,219,219,1) solid;
+		width: 350px;
+		border-radius: 1px;
+		margin: 0 0 10px;
+		padding: 10px 0;
+
+		p {
+			color: rgba38,38,38,1;
+			font-size: 14px;
+			margin: 15px;
+			text-align: center;
+
+			a {
+				text-decoration: none;
+				color: #0095f6;
+			}
+		}
+	}
+
+	.DlApp {
+		text-align: center;
+		font-size: 14px;
+		line-height: 18px;
+		margin: 10px 20px 10px 20px;
+	}
 }

@@ -1,5 +1,4 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -48,8 +47,193 @@ table {
   border-spacing: 0;
 }
 
-.sprite {
+a {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: url("../assets/font/Segoe UI.woff2") format("woff2"), url("../assets/font/Segoe UI.woff") format("woff"), url("../assets/font/Segoe_UI.ttf") format("truetype");
+}
+
+.logo {
   background: url("../assets/IconSprite.png") no-repeat 0 -130px;
   width: 175px;
   height: 51px;
+  margin: 22px auto 12px;
+}
+
+.fbLogo {
+  background: url("../assets/IconSprite.png") no-repeat -414px -300px;
+  width: 16px;
+  height: 16px;
+}
+
+body {
+  background: #FAFAFA;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+section.signup {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+section.signup div.formWrapper {
+  background: white;
+  width: 350px;
+  border: 1px #dbdbdb solid;
+  border-radius: 1px;
+  margin: 0 0 10px;
+  padding: 10px 0;
+}
+
+section.signup div.formWrapper h2 {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0 40px 10px;
+  text-align: center;
+  color: #8e8e8e;
+}
+
+section.signup div.formWrapper .inputBox1 .ou {
+  margin: 18px 40px 18px;
+}
+
+section.signup div.formWrapper .inputBox1 .ou p {
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+}
+
+section.signup div.formWrapper .inputBox1 .ou p::before {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 55%;
+  background-color: #a1a1a1;
+  display: block;
+  top: 7px;
+  left: -40px;
+}
+
+section.signup div.formWrapper .inputBox1 .ou p::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 55%;
+  background-color: #a1a1a1;
+  display: block;
+  top: 7px;
+  right: -40px;
+}
+
+section.signup div.formWrapper .inputBox1 p {
+  text-align: center;
+  color: #8e8e8e;
+  font-size: 12px;
+  margin: 10px 40px;
+  line-height: 16px;
+}
+
+section.signup div.formWrapper .inputBox1 p a {
+  color: #8e8e8e;
+  font-weight: 600;
+}
+
+section.signup div.formWrapper .inputBox1 .fb {
+  width: 100%;
+}
+
+section.signup div.formWrapper .inputBox1 .fb a {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-decoration: none;
+  background-color: #0095F6;
+  border-radius: 4px;
+  margin: 8px 40px;
+  padding: 5px 9px;
+  color: white;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+section.signup div.formWrapper .inputBox1 .fb a div {
+  margin: 0 5px;
+}
+
+section.signup div.formWrapper .inputBox1 form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+section.signup div.formWrapper .inputBox1 form label {
+  display: none;
+}
+
+section.signup div.formWrapper .inputBox1 form input {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #FAFAFA;
+  padding: 9px 0 7px 8px;
+  text-overflow: ellipsis;
+  border: 1px #dbdbdb solid;
+  border-radius: 2px;
+  width: 250px;
+  margin: 3px 0px;
+  padding: 9px;
+}
+
+section.signup div.formWrapper .inputBox1 button {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #B2DFFC;
+  margin: 9px 40px;
+  padding: 5px 9px;
+  color: #FFFFFF;
+  width: 270px;
+}
+
+section.signup div.formWrapper .inputBox2 {
+  background-color: red;
+  display: none;
+}
+
+section.signup div.formWrapper .inputBox2 label {
+  display: none;
+}
+
+section.signup .login {
+  background-color: white;
+  border: 1px #dbdbdb solid;
+  width: 350px;
+  border-radius: 1px;
+  margin: 0 0 10px;
+  padding: 10px 0;
+}
+
+section.signup .login p {
+  color: rgba38,38,38,1;
+  font-size: 14px;
+  margin: 15px;
+  text-align: center;
+}
+
+section.signup .login p a {
+  text-decoration: none;
+  color: #0095f6;
+}
+
+section.signup .DlApp {
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 10px 20px 10px 20px;
 }
