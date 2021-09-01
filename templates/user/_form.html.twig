@@ -1,5 +1,5 @@
 {% block body %}
-<div class="inputBox1">
+<div class="inputBox1" id="input1">
     <div class="sprite logo"></div>
     <h2>Inscrivez-vous pour voir les photos et vidéos de vos amis.</h2>
     <div class="fb"><a href="https://fr-fr.facebook.com/">
@@ -15,7 +15,7 @@
     {{ form_row(form.name, {'attr': {'placeholder': "Nom complet"}}) }}
     {{ form_row(form.username, {'attr': {'placeholder': "Nom d'utilisateur"}}) }}
     {{ form_row(form.password, {'attr': {'placeholder': "Mot de passe"}}) }}
-    <button type="button">Suivant</button>
+    <button type="button" id="next">Suivant</button>
     <p>En vous inscrivant, vous acceptez nos <a href="https://help.instagram.com/581066165581870">Conditions
             générales</a>. Découvrez comment nous recueillons, utilisons et
         partageons vos données en lisant notre <a href="https://help.instagram.com/519522125107875">Politique
@@ -24,8 +24,9 @@
         et autres technologies similaires en consultant notre <a
             href="https://www.instagram.com/legal/cookies/">Politique d’utilisation des cookies.</a></p>
 </div>
-<div class="inputBox2">
+<div class="inputBox2" id="input2">
     {{ form_row(form.dob)}}
+    <button type="button" id="prev">Retour</button>
     <button class="btn">{{ button_label|default('Save') }}</button>
 </div>
 {{ form_end(form) }}
