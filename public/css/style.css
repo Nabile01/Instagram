@@ -206,8 +206,96 @@ section.signup div.formWrapper .inputBox2 {
   display: none;
 }
 
-section.signup div.formWrapper .inputBox2 label {
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 28px;
+  text-align: center;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper label {
   display: none;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper p:nth-child(2) {
+  font-weight: bold;
+  font-size: inherit;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper p {
+  font-size: 14px;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper #toggleModal p {
+  color: #0095f6;
+  cursor: pointer;
+  margin: 5px 0px;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper .footerDob p {
+  margin: 14px 0px;
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper .birthday {
+  background: url("../assets/IconSprite2.png") no-repeat -5px -109px;
+  width: 134px;
+  height: 85px;
+  position: relative;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper .birthday:after {
+  content: '';
+  width: 49px;
+  height: 2px;
+  background-color: #dbdbdb;
+  display: block;
+  position: absolute;
+  bottom: -7px;
+  left: 50px;
+  border-radius: 2px;
+}
+
+section.signup div.formWrapper .inputBox2 .inputBox2Wrapper button {
+  width: 250px;
+  background-color: #0095F6;
+  border-radius: 4px;
+  margin: 8px 40px;
+  padding: 5px 9px;
+  color: white;
+  border: 1px solid transparent;
+}
+
+section.signup #user_dob {
+  margin: 8px 0px;
+}
+
+section.signup #user_dob select {
+  color: #979797;
+  font-size: 12px;
+  height: 36px;
+  padding: 0 3px 0 8px;
+  border-radius: 3px;
+  border: 1px solid #dbdbdb;
+  margin: 6px 2px;
+}
+
+section.signup #user_dob select::placeholder {
+  color: violet;
+  text-align: center;
+}
+
+section.signup #user_dob select:nth-child(1) {
+  width: 91px;
+}
+
+section.signup #user_dob select:focus {
+  color: black;
 }
 
 section.signup .login {
@@ -231,9 +319,14 @@ section.signup .login p a {
   color: #0095f6;
 }
 
+section.signup #UmustEnterDob {
+  font-size: 12px;
+  color: #8e8e8e;
+}
+
 section.signup .DlApp {
   text-align: center;
   font-size: 14px;
   line-height: 18px;
-  margin: 10px 20px 10px 20px;
+  margin: 10px 20px 16px 20px;
 }

@@ -14,10 +14,10 @@
     {{ form_row(form.mail, {'attr': {'placeholder': "E-mail"}}) }}
     {{ form_row(form.name, {'attr': {'placeholder': "Nom complet"}}) }}
     {{ form_row(form.username, {'attr': {'placeholder': "Nom d'utilisateur"}}) }}
-    {{ form_row(form.password, 
-        {'attr': 
-            {'placeholder': "Mot de passe", 'minlenght': '6'},
-        }) 
+    {{ form_row(form.password,
+    {'attr':
+    {'placeholder': "Mot de passe", 'minlenght': '6'},
+    })
     }}
     <button type="button" id="next">Suivant</button>
     <p>En vous inscrivant, vous acceptez nos <a href="https://help.instagram.com/581066165581870">Conditions
@@ -29,9 +29,23 @@
             href="https://www.instagram.com/legal/cookies/">Politique d’utilisation des cookies.</a></p>
 </div>
 <div class="inputBox2" id="input2">
-    {{ form_row(form.dob)}}
-    <button type="button" id="prev">Retour</button>
-    <button class="btn">{{ button_label|default('S\'inscrire') }}</button>
+    <div class="inputBox2Wrapper">
+        <div class="birthday"></div>
+        <p>Ajoutez votre date de naissance</p>
+        <p>Elle ne sera pas affichée sur votre profil public.</p>
+        <div id="toggleModal">
+            <p>Pourquoi dois-je indiquer ma date de naissance ?</p>
+        </div>
+        {{ form_row(form.dob)}}
+        <p id="UmustEnterDob">Vous devez entrer votre date de naissance</p>
+        <div class="footerDob">
+            <p>Utilisez votre propre date de naissance, même si ce compte est destiné à une entreprise, à un animal de
+                compagnie
+                ou à autre chose</p>
+        </div>
+        <button class="btn">{{ button_label|default('S\'inscrire') }}</button>
+        <button type="button" id="prev">Retour</button>
+    </div>
 </div>
 {{ form_end(form) }}
 

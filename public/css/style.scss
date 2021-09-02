@@ -89,6 +89,7 @@ body {
 	font-family: 'Segoe UI', sans-serif;
 }
 
+//-----------register form
 section.signup {
 	display: flex;
 	justify-content: center;
@@ -205,13 +206,103 @@ section.signup {
 				width: 270px;
 			}
 		}
-
+//-------------date of birth form
 		.inputBox2 {
 			background-color: red;
-			label {
-				display: none;
-			}
 			display: none;
+
+			.inputBox2Wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				padding: 8px 28px;
+				text-align: center;
+
+				label {
+					display: none;
+				}
+
+				p:nth-child(2) {
+					font-weight: bold;
+					font-size: inherit;
+					margin-top: 16px;
+					margin-bottom: 16px;
+				}
+
+				p {
+					font-size: 14px;
+				}
+
+				#toggleModal {
+					p {
+						color: #0095f6;
+						cursor: pointer;
+						margin: 5px 0px;
+					}
+				}
+
+				.footerDob {
+					p {
+						margin: 14px 0px;
+						font-size: 12px;
+						color: #8e8e8e;
+					}
+				}
+	
+				.birthday {
+					background: url('../assets/IconSprite2.png') no-repeat -5px -109px;
+					width: 134px;
+					height: 85px;
+					position: relative;
+
+					&:after {
+						content: '';
+						width: 49px;
+						height: 2px;
+						background-color: #dbdbdb;
+						display: block;
+						position: absolute;
+						bottom: -7px;
+						left: 50px;
+						border-radius: 2px;
+					}
+				}
+
+				button {
+					width: 250px;
+					@include btnColorOk;
+				}
+			}
+		}
+	}
+
+	//input select dob
+	#user_dob {
+		margin: 8px 0px;
+
+		select {
+			color: #979797;
+			font-size: 12px;
+			height: 36px;
+			padding: 0 3px 0 8px;
+			border-radius: 3px;
+			border: 1px solid #dbdbdb;
+			margin: 6px 2px;
+			
+			&::placeholder {
+				color: violet;
+				text-align: center;
+			}
+
+			&:nth-child(1) {
+				width: 91px;
+				
+			}
+
+			&:focus {
+				color: black;
+			}
 		}
 	}
 
@@ -236,10 +327,15 @@ section.signup {
 		}
 	}
 
+	#UmustEnterDob {
+		font-size: 12px;
+		color:rgba(142,142,142,1);
+	}
+
 	.DlApp {
 		text-align: center;
 		font-size: 14px;
 		line-height: 18px;
-		margin: 10px 20px 10px 20px;
+		margin: 10px 20px 16px 20px;
 	}
 }
