@@ -338,4 +338,102 @@ section.signup {
 		line-height: 18px;
 		margin: 10px 20px 16px 20px;
 	}
+
+	#modalWrapper {
+		background-color: rgba(0,0,0,.65);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 0%;
+		overflow: hidden;
+
+		.modalContent {
+			background: white;
+			width: 400px;	
+			position: inherit;
+			text-align: center;
+			border-radius: 12px;
+
+			.modalHeader {
+				border-bottom: 1px solid #dbdbdb;
+				display: flex;
+				color: #505050;
+				height: 43px;
+				align-items: center;
+				overflow: hidden;
+
+				h1 {
+					flex-grow: 1;
+					font-size: 16px;
+				}
+
+				div:first-child{
+					height: 46.8px;
+					width: 50.53px;
+				}
+
+				#close {
+					padding: 8px;
+					font-size: 45px;
+					cursor: pointer;
+					margin-bottom: 10px;
+				}
+			}
+
+			.modalFooter {
+				border-top: 1px solid #dbdbdb;
+				height: 43px;
+
+				a {
+					color: #0095f6;
+					font-size: 14px;
+					font-weight: 600;
+					line-height: 44px;
+					padding: 8px 35%;
+					text-align: center;
+				}
+			}
+		}
+
+		.modalBody {
+			margin: 20px 28px;
+
+			h3 {
+				color: #262626;
+			}
+
+			p {
+				font-size: 14px;
+				text-align: center;
+				color: #262626;
+				line-height: 18px;
+				margin: -3px 0 -4px;
+			}
+
+			.modalBirthday {
+				background: url('../assets/IconSprite2.png') no-repeat -5px -109px;
+				width: 134px;
+				height: 85px;
+				margin: 0 auto;
+				position: relative;
+
+					&:after {
+						content: '';
+						width: 49px;
+						height: 2px;
+						background-color: #dbdbdb;
+						display: block;
+						position: absolute;
+						bottom: -7px;
+						left: 50px;
+						border-radius: 2px;
+					}
+			}
+		}
+	}
 }

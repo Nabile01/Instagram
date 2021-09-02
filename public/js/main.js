@@ -1,5 +1,4 @@
-console.log('ocuo');
-
+//form
 const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
 
@@ -16,3 +15,20 @@ prevBtn.addEventListener('click',function(){
     inputBox1.style.display="initial";
     inputBox2.style.display="none";
 })
+
+//modalForm
+const modalTrigger = document.getElementById('toggleModal');
+const modalWrapper = document.getElementById('modalWrapper');
+const closeBtn = document.getElementById('close');
+
+modalTrigger.addEventListener('click', function(){
+    modalWrapper.style.height="100%";
+})
+
+closeBtn.addEventListener('click', function(){
+    modalWrapper.style.height="0%";
+})
+
+
+
+
