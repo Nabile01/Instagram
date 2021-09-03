@@ -35,8 +35,6 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $username);
 
-        dd($username);
-
         return new Passport(
             new UserBadge($username),
             new PasswordCredentials($request->request->get('password', '')),

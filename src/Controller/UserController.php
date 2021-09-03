@@ -57,7 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("show/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -87,7 +87,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user): Response
     {
@@ -98,5 +98,15 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{username}", name="user_panel", methods={"GET"})
+     */
+    public function showPanel(User $user): Response
+    {
+        return $this->render('user/panel.html.twig', [
+            'user' => $user,
+        ]);
     }
 }

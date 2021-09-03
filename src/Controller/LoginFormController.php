@@ -14,9 +14,10 @@ class LoginFormController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+            $username = $this->getUser()->getUsername();
+            return $this->redirectToRoute('user_panel',['username' => $username]);
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
