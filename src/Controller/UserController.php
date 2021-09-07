@@ -4,14 +4,17 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\FollowersRepository;
+use App\Form\ThumbnailType;
 use App\Repository\PostRepository;
-use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FollowersRepository;
+use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
@@ -104,10 +107,51 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{username}", name="user_panel", methods={"GET"})
+     * @Route("/{username}", name="user_panel", methods={"GET","POST"})
      */
-    public function showPanel(User $user, PostRepository $postRepository, SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository): Response
+    public function showPanel(Request $request, SluggerInterface $slugger, User $user, PostRepository $postRepository, SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository): Response
     {
+        $thumbnailUser = new User();
+        $form = $this->createForm(ThumbnailType::class, $thumbnailUser);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $thumbnailFile */
+            $thumbnailFile = $form->get('thumbnail')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($thumbnailFile) {
+                $originalFilename = pathinfo($thumbnailFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$thumbnailFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $thumbnailFile->move(
+                        $this->getParameter('thumbnails_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $thumbnailUser->setThumbnail($newFilename);
+
+                $user->setThumbnail(
+                    $newFilename,
+                )
+            ;
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+        }
+
         $id_user = $user->getId();
 
         return $this->render('user/panel.html.twig', [
@@ -115,6 +159,7 @@ class UserController extends AbstractController
             'post' => $postRepository->findBy(['id_user' =>$id_user]),
             'subscription' => $subscriptionRepository->findBy(['id_user' =>$id_user]),
             'follower' => $followersRepository->findBy(['id_user' =>$id_user]),
+            'form' => $form->createView(),
         ]);
     }
 }

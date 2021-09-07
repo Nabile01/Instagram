@@ -4,20 +4,21 @@
 
 {% block body %}
 <main class="panel">
-    <label for="file">
+    <label for="thumbnail_thumbnail">
         <div class="thumbnailWrapper">
             {% if app.user.thumbnail %}
-            <img src="../assets/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
+            <img src="../assets/thumbnails/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
             {% else %}
             <img src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
             {% endif %}
         </div>
     </label>
-    <form action="" enctype="multipart/form-data">
-        {% if app.user.thumbnail is empty %}
-            <input type="file" id="file">
-        {% endif %}
-    </form>
+    {% if app.user.thumbnail is empty %}
+    {{ form_start(form) }}
+            {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
+    {{ form_end(form) }}
+    {% endif %}
+
     <div class="userInfo">
         <h2>{{app.user.username}}</h2>
         <a href="">Modifier</a>

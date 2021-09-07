@@ -51,7 +51,7 @@ document.addEventListener('click', function (event) {
 // })
 
 //------submit Thumbnail
-const inputFile = document.getElementById('file');
+const inputFile = document.getElementById('thumbnail_thumbnail');
 inputFile.addEventListener('change',function(){
     this.form.submit();
 })
