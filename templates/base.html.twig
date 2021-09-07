@@ -14,27 +14,38 @@
 
 <body>
     {% if (app.user) %}
-    <header>{% block header %}
+    <header>
+        {% block header %}
         <nav>
-            <div class="navWrapper">
-                <a href="">
-                    <div id="instaNav"></div>
-                </a>
-                <input type="text" placeholder="Rechercher">
-                <div class="iconMenu">
+            <div class="navBox">
+                <div class="navWrapper">
                     <a href="">
-                        <div id="home"></div>
+                        <div id="instaNav"></div>
                     </a>
-                    <a href="">
-                        <div id="chat"></div>
-                    </a>
-                    <a href="">
-                        <div id="compass"></div>
-                    </a>
-                    <a href="">
-                        <div id="like"></div>
-                    </a>
-                    <div id="panel"></div>
+                    <input type="search" placeholder="Rechercher">
+                    <div class="iconMenu">
+                        <a href="">
+                            <div id="home"></div>
+                        </a>
+                        <a href="">
+                            <div id="chat"></div>
+                        </a>
+                        <a href="">
+                            <div id="compass"></div>
+                        </a>
+                        <a href="">
+                            <div id="like"></div>
+                        </a>
+                        <div id="panel">
+                            <div id="panelMenu" class="menuToggle" >
+                                <a href="" class="profil"><div id="thumbnailMenu"></div>Profil</a>
+                                <a href="" class="checkedIn"><div id="checkedIn"></div>Enregistré</a>
+                                <a href="" class="setting"><div id="setting"></div>Paramètres</a>
+                                <a href="" class="switchAccount"><div id="switchAccount"></div>Changer de compte</a>
+                                <a href="{{ path('app_logout') }}" class="dc">Déconnexion</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

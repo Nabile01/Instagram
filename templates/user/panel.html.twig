@@ -1,7 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}pannel{% endblock %}
 
 {% block body %}
-body
+<main class="panel">
+    <label for="file">
+        <div class="thumbnailWrapper">
+            {% if app.user.thumbnail %}
+            <img src="../assets/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
+            {% else %}
+            <img src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
+            {% endif %}
+        </div>
+    </label>
+    <form action="" enctype="multipart/form-data">
+        {% if app.user.thumbnail is empty %}
+            <input type="file" id="file">
+        {% endif %}
+    </form>
+    <div class="userInfo">
+        <h2>{{app.user.username}}</h2>
+        <a href="">Modifier</a>
+        <div id="setting2"></div>
+        <p>{{post|length}} publications</p>
+        <p>{{follower|length}} abonnés</p>
+        <p>{{subscription|length}} abonnements</p>
+        <h1>{{app.user.name}}</h1>
+    </div>
+</main>
 {% endblock %}

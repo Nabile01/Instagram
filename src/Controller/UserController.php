@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\FollowersRepository;
+use App\Repository\PostRepository;
+use App\Repository\SubscriptionRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,10 +106,15 @@ class UserController extends AbstractController
     /**
      * @Route("/{username}", name="user_panel", methods={"GET"})
      */
-    public function showPanel(User $user): Response
+    public function showPanel(User $user, PostRepository $postRepository, SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository): Response
     {
+        $id_user = $user->getId();
+
         return $this->render('user/panel.html.twig', [
             'user' => $user,
+            'post' => $postRepository->findBy(['id_user' =>$id_user]),
+            'subscription' => $subscriptionRepository->findBy(['id_user' =>$id_user]),
+            'follower' => $followersRepository->findBy(['id_user' =>$id_user]),
         ]);
     }
 }
