@@ -119,6 +119,11 @@ class UserController extends AbstractController
             /** @var UploadedFile $thumbnailFile */
             $thumbnailFile = $form->get('thumbnail')->getData();
 
+            $filename = $user->getThumbnail();       
+                if(isset($filename)) {
+                    unlink('../public/assets/thumbnails/'.$filename);
+            }
+
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
             if ($thumbnailFile) {
@@ -170,6 +175,11 @@ class UserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$user->getThumbnail(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $filename = $user->getThumbnail();       
+            if(isset($filename)) {
+                unlink('../public/assets/thumbnails/'.$filename);
+            }
+
             $nullThumb = null;
             $user->setThumbnail(
                 $nullThumb,
