@@ -51,9 +51,25 @@ document.addEventListener('click', function (event) {
 // })
 
 //------submit Thumbnail
-const inputFile = document.getElementById('thumbnail_thumbnail');
-inputFile.addEventListener('change',function(){
-    this.form.submit();
+// const inputFile = document.getElementById('thumbnail_thumbnail');
+// inputFile.addEventListener('change',function(){
+//     this.form.submit();
+// })
+
+//-----Open modal Thumbnail
+const userThumbnail = document.getElementById('userThumbnail');
+const thumbnailModal = document.getElementById('thumbnailModal');
+const cancelBtn = document.getElementById('cancel');
+
+userThumbnail.addEventListener('click',function(){
+    thumbnailModal.style.display='initial';
 })
+
+thumbnailModal.addEventListener('click',closeModal);
+cancelBtn.addEventListener('click', closeModal);
+
+function closeModal() {
+    thumbnailModal.style.display='none';
+}
 
 

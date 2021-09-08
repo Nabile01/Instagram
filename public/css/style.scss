@@ -626,7 +626,7 @@ section.signup {
 	}
 }
 
-//--------VIEW--USER PANEL
+//---------------USER PANEL
 main.panel {
 	margin-top: 60px;
 
@@ -644,6 +644,57 @@ main.panel {
 		img {
 			width: 100%;
 			height: 100%;
+		}
+	}
+
+	//____MODAL
+	div.overlay {
+		background: rgba(0,0,0,.65);
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: none;
+
+		div.modal {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: #fff;
+			border-radius: 12px;
+			overflow: hidden;
+			width: 420px;
+			display: flex;
+			justify-content: center;
+			text-align: center;
+			flex-direction: column;
+
+			h3 {
+				color: #262626;
+				font-weight: 600;
+				font-size: 18px;
+				margin: 32px;
+			}
+
+			button {
+				background: transparent;
+				border: none;
+				border-top: 1px solid #dbdbdb;
+				cursor: pointer;
+				padding: 4px 8px;
+				min-height: 48px;
+				font-size: 14px;
+			}
+			#importBtn {
+				color: #0095f6;
+				font-weight: 700;
+			}
+			#deleteBtn {
+				color: #ed4956;
+				font-weight: 700;
+			}
 		}
 	}
 }

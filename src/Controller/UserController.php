@@ -162,4 +162,20 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+     /**
+     * @Route("/delete/{id}", name="userThumbnail_delete", methods={"POST","GET"})
+     */
+    public function deleteUserThumbnail(Request $request, User $user): Response
+    {
+        dd($user->getThumbnail());
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            dd($user->getThumbnail());
+            $entityManager->remove($user->getThumbnail());
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+    }
 }

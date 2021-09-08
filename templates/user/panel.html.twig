@@ -7,26 +7,43 @@
     <label for="thumbnail_thumbnail">
         <div class="thumbnailWrapper">
             {% if app.user.thumbnail %}
-            <img src="../assets/thumbnails/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
+            <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
             {% else %}
-            <img src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
+            <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
             {% endif %}
         </div>
     </label>
     {% if app.user.thumbnail is empty %}
     {{ form_start(form) }}
-            {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
+    {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
     {{ form_end(form) }}
     {% endif %}
 
+    {# --------------- MODAL #}
+    <div class="overlay" id="thumbnailModal">
+        <div class="modal">
+            <h3>Modifier la photo de profil</h3>
+            <button id="importBtn">Importer une photo</button>
+            <form method="post" action="{{ path('userThumbnail_delete', {'id': user.id}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                <button id="deleteBtn">Supprimer la photo actuelle</button>
+            </form>
+            <button id="cancel">Annuler</button>
+        </div>
+    </div>
+
     <div class="userInfo">
         <h2>{{app.user.username}}</h2>
-        <a href="">Modifier</a>
+        <a href="">Modifier le profil</a>
         <div id="setting2"></div>
         <p>{{post|length}} publications</p>
         <p>{{follower|length}} abonnés</p>
         <p>{{subscription|length}} abonnements</p>
         <h1>{{app.user.name}}</h1>
     </div>
+
+    <section class="userPosts">
+
+    </section>
 </main>
 {% endblock %}
