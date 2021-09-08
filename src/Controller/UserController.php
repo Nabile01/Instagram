@@ -164,15 +164,17 @@ class UserController extends AbstractController
     }
 
      /**
-     * @Route("/delete/{id}", name="userThumbnail_delete", methods={"POST","GET"})
+     * @Route("/remove/{thumbnail}", name="userThumbnail_delete", methods={"POST","GET"})
      */
     public function deleteUserThumbnail(Request $request, User $user): Response
     {
-        dd($user->getThumbnail());
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$user->getThumbnail(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            dd($user->getThumbnail());
-            $entityManager->remove($user->getThumbnail());
+            $nullThumb = null;
+            $user->setThumbnail(
+                $nullThumb,
+            );
+            $entityManager->persist($user);
             $entityManager->flush();
         }
 

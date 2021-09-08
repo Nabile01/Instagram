@@ -5,8 +5,6 @@ const subMenu = document.getElementById('panelMenu');
 
 var disr = window.getComputedStyle(document.querySelector('#panel'), ':after');
 
-console.log(disr.getPropertyValue('display'));
-
 profileIcon.addEventListener('click', function () {
     subMenu.classList.toggle("menuToggle");
 })
@@ -51,19 +49,23 @@ document.addEventListener('click', function (event) {
 // })
 
 //------submit Thumbnail
-// const inputFile = document.getElementById('thumbnail_thumbnail');
-// inputFile.addEventListener('change',function(){
-//     this.form.submit();
-// })
+const inputFile = document.getElementById('thumbnail_thumbnail');
+if(inputFile) {
+    inputFile.addEventListener('change',function(){
+        this.form.submit();
+    })
+}
 
 //-----Open modal Thumbnail
 const userThumbnail = document.getElementById('userThumbnail');
 const thumbnailModal = document.getElementById('thumbnailModal');
 const cancelBtn = document.getElementById('cancel');
 
-userThumbnail.addEventListener('click',function(){
-    thumbnailModal.style.display='initial';
-})
+if(userThumbnail.src !== "defaultThumbnail.jpg") {
+    userThumbnail.addEventListener('click',function(){
+        thumbnailModal.style.display='initial';
+    })
+}
 
 thumbnailModal.addEventListener('click',closeModal);
 cancelBtn.addEventListener('click', closeModal);

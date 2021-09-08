@@ -20,17 +20,20 @@
     {% endif %}
 
     {# --------------- MODAL #}
+    {% if user.thumbnail %}
     <div class="overlay" id="thumbnailModal">
         <div class="modal">
             <h3>Modifier la photo de profil</h3>
             <button id="importBtn">Importer une photo</button>
-            <form method="post" action="{{ path('userThumbnail_delete', {'id': user.id}) }}">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+            <form method="post" action="{{ path('userThumbnail_delete', {'thumbnail': user.thumbnail}) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.thumbnail) }}">
                 <button id="deleteBtn">Supprimer la photo actuelle</button>
             </form>
+            
             <button id="cancel">Annuler</button>
         </div>
     </div>
+    {% endif %}
 
     <div class="userInfo">
         <h2>{{app.user.username}}</h2>
