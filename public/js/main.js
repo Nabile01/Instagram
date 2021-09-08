@@ -50,8 +50,14 @@ document.addEventListener('click', function (event) {
 
 //------submit Thumbnail
 const inputFile = document.getElementById('thumbnail_thumbnail');
-if(inputFile) {
-    inputFile.addEventListener('change',function(){
+const inputFile2 = document.getElementById('modalFile');
+if (inputFile) {
+    inputFile.addEventListener('change', function () {
+        this.form.submit();
+    })
+}
+if (inputFile2) {
+    inputFile2.addEventListener('change', function () {
         this.form.submit();
     })
 }
@@ -61,17 +67,16 @@ const userThumbnail = document.getElementById('userThumbnail');
 const thumbnailModal = document.getElementById('thumbnailModal');
 const cancelBtn = document.getElementById('cancel');
 
-if(userThumbnail.src !== "defaultThumbnail.jpg") {
-    userThumbnail.addEventListener('click',function(){
-        thumbnailModal.style.display='initial';
-    })
-}
 
-thumbnailModal.addEventListener('click',closeModal);
+userThumbnail.addEventListener('click', function () {
+    thumbnailModal.style.display = 'initial';
+}) 
+
+thumbnailModal.addEventListener('click', closeModal);
 cancelBtn.addEventListener('click', closeModal);
 
 function closeModal() {
-    thumbnailModal.style.display='none';
+    thumbnailModal.style.display = 'none';
 }
 
 

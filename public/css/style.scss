@@ -686,15 +686,27 @@ main.panel {
 				padding: 4px 8px;
 				min-height: 48px;
 				font-size: 14px;
+				width: 100%;
 			}
+
 			#importBtn {
 				color: #0095f6;
 				font-weight: 700;
+				display: block;
+				width: 100%;
+				cursor: pointer;
+				background: transparent;
+				border: none;
+				border-top: 1px solid #dbdbdb;
+				min-height: 48px;
+				font-size: 14px;
+				line-height: 49px;
 			}
+
 			#deleteBtn {
 				color: #ed4956;
 				font-weight: 700;
 			}
-		}
+		}	
 	}
 }
