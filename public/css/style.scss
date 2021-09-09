@@ -144,6 +144,7 @@ a {
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
+	margin-left: 15px;
 }
 
 //---------endpanel
@@ -658,7 +659,7 @@ main.panel {
 		}
 	}
 
-	//____MODAL
+	//__________________MODAL
 	div.overlay {
 		background: rgba(0,0,0,.65);
 		position: fixed;
@@ -719,5 +720,68 @@ main.panel {
 				font-weight: 700;
 			}
 		}	
+	}
+
+	//-------------SECTION USER PANEL
+	section.userPanel {
+		display: flex;
+		justify-content: center;
+		padding: 30px 20px;
+
+		div.userInfo {
+			width: 614px;
+			margin: 0 0 0px 90px;
+
+			.userInfo1 {
+				display: flex;
+				align-items: center;
+
+				h2 {
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					font-weight: 300;
+					font-size: 28px;
+					color: #262626;
+				}
+
+				a {
+					background-color: transparent;
+					border: 1px solid #dbdbdb;
+					color: #262626;
+					border-radius: 4px;
+					padding: 5px 9px;
+					height: 18px;
+					font-weight: bolder;
+					margin-left: 20px;
+					font-size: 14px;
+					line-height: 17px;
+				}
+			}
+
+			.userInfo2 {
+				display: flex;
+
+				p {
+					font-size: 16px;
+					color: #262626;
+
+					span {
+						font-weight: bold;
+					}
+				}
+				
+				p:nth-child(1n+2) {
+					margin-left: 40px;
+				}
+			}
+
+			h1 {
+				font-size: 16px;
+				word-wrap: break-word;
+				font-weight: 600;
+				margin-top: 24px;
+			}
+		}
 	}
 }

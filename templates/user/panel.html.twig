@@ -4,21 +4,51 @@
 
 {% block body %}
 <main class="panel">
-    <label for="thumbnail_thumbnail">
-        <div class="thumbnailWrapper">
-            {% if app.user.thumbnail %}
-            <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}"
-                alt="Ajouter une photo de profil">
-            {% else %}
-            <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
-            {% endif %}
+    <section class="userPanel">
+        <label for="thumbnail_thumbnail">
+            <div class="thumbnailWrapper">
+                {% if app.user.thumbnail %}
+                <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}"
+                    alt="Ajouter une photo de profil">
+                {% else %}
+                <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
+                {% endif %}
+            </div>
+        </label>
+        {% if app.user.thumbnail is empty %}
+        {{ form_start(form) }}
+        {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
+        {{ form_end(form) }}
+        {% endif %}
+        
+        <div class="userInfo">
+            <div class="userInfo1">
+                <h2>{{app.user.username}}</h2>
+                <a href="">Modifier profil</a>
+                <div id="setting2"></div>
+            </div>
+            <div class="userInfo2">
+                <p><span> {{post|length}}</span> publications</p>
+                <p><span>{{follower|length}}</span> abonnés</p>
+                <p><span>{{subscription|length}}</span> abonnements</p>
+            </div>
+            <h1>{{app.user.name}}</h1>
         </div>
-    </label>
-    {% if app.user.thumbnail is empty %}
-    {{ form_start(form) }}
-    {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
-    {{ form_end(form) }}
-    {% endif %}
+    </section>
+
+    <section class="userPosts">
+        {% for posts in post %}
+        <div class="postWrapper">
+            {% for img in posts.media %}
+            <img alt="Image de publication" src="../assets/medias/{{ img.url }}">
+            {% endfor %}
+            <p>{{ posts.description }}</p>
+        </div>
+        {% endfor %}
+    </section>
+
+
+
     {# --------------- MODAL #}
     {% if user.thumbnail %}
     <div class="overlay" id="thumbnailModal">
@@ -32,44 +62,25 @@
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.thumbnail) }}">
                 <button id="deleteBtn">Supprimer la photo actuelle</button>
             </form>
-
             <button id="cancel">Annuler</button>
         </div>
     </div>
     {% endif %}
-    {# --------------END MODAL #}
 
-    <div class="userInfo">
-        <h2>{{app.user.username}}</h2>
-        <a href="">Modifier le profil</a>
-        <div id="setting2"></div>
-        <p>{{post|length}} publications</p>
-        <p>{{follower|length}} abonnés</p>
-        <p>{{subscription|length}} abonnements</p>
-        <h1>{{app.user.name}}</h1>
+    <div class="overlay" id="settingModal">
+        <div class="modal">
+            <button>Changer de mot de passe</button>
+            <button>Nametag</button>
+            <button>Apps et sites web</button>
+            <button>Notifications</button>
+            <button>Configentialité et sécurité</button>
+            <button>Activité de connexion</button>
+            <button>E-mails d'Instagram</button>
+            <button>Signaler un problème</button>
+            <button>Déconnexion</button>
+            <button id="cancel">Annuler</button>
+        </div>
     </div>
-
-    <section class="userPosts">
-        {# {% for post in posts %}
-
-        {% for img in post.medias %}
-        <p>{{ img.url }}</p>
-        {% endfor %}
-        <tr>
-            <td>{{ post.id }}</td>
-            <td>{{ post.description }}</td>
-            <td>{{ post.geoloc }}</td>
-            <td>{{ post.datePosts ? post.datePosts|date('Y-m-d') : '' }}</td>
-            <td>
-                <a href="{{ path('posts_show', {'id': post.id}) }}">show</a>
-                <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
-            </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="5">no records found</td>
-        </tr>
-        {% endfor %} #}
-    </section>
+    {# --------------END MODAL #}
 </main>
 {% endblock %}

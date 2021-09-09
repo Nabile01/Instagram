@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\ThumbnailType;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Repository\FollowersRepository;
+use App\Repository\MediaRepository;
 use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,7 +111,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{username}", name="user_panel", methods={"GET","POST"})
      */
-    public function showPanel(Request $request, SluggerInterface $slugger, User $user, PostRepository $postRepository, SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository): Response
+    public function showPanel(Request $request, SluggerInterface $slugger, User $user, PostRepository $postRepository, SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository, MediaRepository $mediaRepository): Response
     {
         $thumbnailUser = new User();
         $form = $this->createForm(ThumbnailType::class, $thumbnailUser);
