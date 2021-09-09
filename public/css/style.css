@@ -99,6 +99,30 @@ a {
   height: 22px;
 }
 
+#postIcon {
+  background: url("../assets/IconSprite.png") no-repeat -174px -369px;
+  width: 12px;
+  height: 12px;
+}
+
+#igtvIcon {
+  background: url("../assets/IconSprite.png") no-repeat -189px -369px;
+  width: 10px;
+  height: 12px;
+}
+
+#savedIcon {
+  background: url("../assets/IconSprite.png") no-repeat 0 -389px;
+  width: 10px;
+  height: 12px;
+}
+
+#tagIcon {
+  background: url("../assets/IconSprite.png") no-repeat -216px -369px;
+  width: 12px;
+  height: 12px;
+}
+
 #panel {
   background: url("../assets/IconSprite2.png") no-repeat 0 -447px;
   width: 23px;
@@ -764,4 +788,80 @@ main.panel section.userPanel div.userInfo h1 {
   word-wrap: break-word;
   font-weight: 600;
   margin-top: 24px;
+}
+
+main.panel .tablistWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+main.panel .tablistWrapper div.tablist {
+  display: flex;
+  justify-content: center;
+  width: 935px;
+  border-top: 1px solid #dbdbdb;
+  text-align: center;
+}
+
+main.panel .tablistWrapper div.tablist .tablistIcon {
+  margin-right: 5px;
+}
+
+main.panel .tablistWrapper div.tablist a {
+  display: flex;
+  color: #8e8e8e;
+  margin-left: 60px;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 22px 0px;
+}
+
+main.panel .tablistWrapper div.tablist a:active {
+  color: #dbdbdb;
+}
+
+main.panel .tablistWrapper div.tablist a:first-child {
+  color: #262626;
+  border-top: 1px solid black;
+  margin-top: -1px;
+}
+
+main.panel .tablistWrapper div.tablist a:first-child:active {
+  color: #dbdbdb;
+}
+
+main.panel section.userPosts {
+  display: flex;
+  justify-content: center;
+}
+
+main.panel section.userPosts div.postWrapper {
+  width: 935px;
+}
+
+main.panel section.userPosts div.defaultpostWrapper {
+  display: flex;
+}
+
+main.panel section.userPosts div.defaultPost {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 555px;
+}
+
+main.panel section.userPosts div.defaultPost div {
+  text-align: center;
+}
+
+main.panel section.userPosts div.defaultPost div h2 {
+  font-size: 18px;
+}
+
+main.panel section.userPosts div.defaultPost div h3 {
+  font-size: 16px;
+  margin-top: 10px;
 }

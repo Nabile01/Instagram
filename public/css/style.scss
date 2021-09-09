@@ -96,6 +96,31 @@ a {
 	height:22px;
 }
 
+#postIcon {
+	background: url('../assets/IconSprite.png') no-repeat -174px -369px;
+	width: 12px;
+	height: 12px;
+}
+
+#igtvIcon{
+	background: url('../assets/IconSprite.png') no-repeat -189px -369px;
+	width: 10px;
+	height: 12px;
+}
+
+#savedIcon{
+	background: url('../assets/IconSprite.png') no-repeat 0 -389px;
+	width: 10px;
+	height: 12px;
+}
+
+#tagIcon{
+	background: url('../assets/IconSprite.png') no-repeat -216px -369px;
+	width: 12px;
+	height: 12px;
+}
+
+
 //----------paneluser
 #panel {
 	background: url('../assets/IconSprite2.png') no-repeat 0 -447px;
@@ -781,6 +806,84 @@ main.panel {
 				word-wrap: break-word;
 				font-weight: 600;
 				margin-top: 24px;
+			}
+		}
+	}
+
+	//-----------tablist userpanel
+	.tablistWrapper {
+		display: flex;
+		justify-content: center;
+		
+		div.tablist {
+			display: flex;
+			justify-content: center;
+			width: 935px;
+			border-top: 1px solid #dbdbdb;
+			text-align: center;
+
+			.tablistIcon {
+				margin-right: 5px;
+			}
+
+			a {
+				display: flex;
+				color: #8e8e8e;
+				margin-left: 60px;
+				letter-spacing: 1px;
+				font-size: 12px;
+				font-weight: bold;
+				padding: 22px 0px;
+
+				&:active {
+					color: #dbdbdb;
+				}
+			}
+
+			a:first-child {
+				color: #262626;
+				border-top: 1px solid black;
+				margin-top: -1px;
+
+				&:active {
+					color: #dbdbdb;
+				}
+			}
+		}
+	}
+
+	//------SECTION userPOST
+	section.userPosts {
+		display: flex;
+		justify-content: center;
+		
+		div.postWrapper {
+			width: 935px;
+		}
+
+		//defaultpost
+		div.defaultpostWrapper {
+			display: flex;
+		}
+
+		div.defaultPost {
+			background: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			justify-content: space-evenly;
+			width: 555px;
+
+			div {
+				text-align: center;
+				h2 {
+					font-size: 18px;
+				}
+	
+				h3 {
+					font-size: 16px;
+					margin-top: 10px;
+				}
 			}
 		}
 	}

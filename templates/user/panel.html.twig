@@ -11,7 +11,8 @@
                 <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}"
                     alt="Ajouter une photo de profil">
                 {% else %}
-                <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
+                <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}"
+                    alt="Ajouter une photo de profil">
                 {% endif %}
             </div>
         </label>
@@ -20,7 +21,7 @@
         {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
         {{ form_end(form) }}
         {% endif %}
-        
+
         <div class="userInfo">
             <div class="userInfo1">
                 <h2>{{app.user.username}}</h2>
@@ -36,16 +37,53 @@
         </div>
     </section>
 
-    <section class="userPosts">
-        {% for posts in post %}
-        <div class="postWrapper">
-            {% for img in posts.media %}
-            <img alt="Image de publication" src="../assets/medias/{{ img.url }}">
-            {% endfor %}
-            <p>{{ posts.description }}</p>
+    <div class="tablistWrapper">
+        <div class="tablist">
+            <a href="">
+                <div class="tablistIcon" id="postIcon"></div>PUBLICATIONS
+            </a>
+            <a href="">
+                <div class="tablistIcon" id="igtvIcon"></div>IGTV
+            </a>
+            <a href="">
+                <div class="tablistIcon" id="savedIcon"></div>ENREGISTREMENTS
+            </a>
+            <a href="">
+                <div class="tablistIcon" id="tagIcon"></div>IDENTIFIÉ(E)
+            </a>
         </div>
-        {% endfor %}
+    </div>
+
+    <section class="userPosts">
+        <div class="postWrapper">
+            {% if post %}
+            {% for posts in post %}
+            <div class="postWrapper">
+                {% for img in posts.media %}
+                <img alt="Image de publication" src="../assets/medias/{{ img.url }}">
+                {% endfor %}
+                <p>{{ posts.description }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="defaultpostWrapper">
+                    <img height="380px" width="380px" src="{{ asset('/assets/defaultpost.jpg') }}"
+                    alt="Petite galerie d'image">
+                <div class="defaultPost">
+                    <div>
+                        <h2>Commencez à capturer et partager vos moments</h2>
+                        <h3>Téléchargez l’app pour partager votre première photo ou vidéo.</h3>
+                        <div class="appImg">
+                            <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&ct=igweb.loginPage.badge&mt=8&vt=lo"><img src="{{ asset('/assets/appStore.png')}}" width="136px" height="40px" alt="Télécharger dans l'app Store"></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3DA13729B6-5897-4AAD-823D-8BF427B93B48%26utm_content%3Dlo%26utm_medium%3Dbadge"><img src="{{ asset('/assets/googlePlay.png')}}" width="134px" height="40px" alt="Disponible sur Google Play"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
     </section>
+
 
 
 
