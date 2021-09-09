@@ -7,31 +7,32 @@
     <label for="thumbnail_thumbnail">
         <div class="thumbnailWrapper">
             {% if app.user.thumbnail %}
-            <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}" alt="Ajouter une photo de profil">
+            <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}"
+                alt="Ajouter une photo de profil">
             {% else %}
             <img id="userThumbnail" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Ajouter une photo de profil">
             {% endif %}
         </div>
     </label>
     {% if app.user.thumbnail is empty %}
-        {{ form_start(form) }}
-        {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
-        {{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.thumbnail, {'attr': {'id': "file"}}) }}
+    {{ form_end(form) }}
     {% endif %}
     {# --------------- MODAL #}
     {% if user.thumbnail %}
     <div class="overlay" id="thumbnailModal">
         <div class="modal">
             <h3>Modifier la photo de profil</h3>
-                {{ form_start(form) }}
-                <label id="importBtn" for="modalFile">Importer une photo</label>
-                {{ form_row(form.thumbnail, { 'id': 'modalFile' }) }}
-                {{ form_end(form) }}
+            {{ form_start(form) }}
+            <label id="importBtn" for="modalFile">Importer une photo</label>
+            {{ form_row(form.thumbnail, { 'id': 'modalFile' }) }}
+            {{ form_end(form) }}
             <form method="post" action="{{ path('userThumbnail_delete', {'thumbnail': user.thumbnail}) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.thumbnail) }}">
                 <button id="deleteBtn">Supprimer la photo actuelle</button>
             </form>
-            
+
             <button id="cancel">Annuler</button>
         </div>
     </div>
@@ -49,7 +50,26 @@
     </div>
 
     <section class="userPosts">
+        {# {% for post in posts %}
 
+        {% for img in post.medias %}
+        <p>{{ img.url }}</p>
+        {% endfor %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td>{{ post.description }}</td>
+            <td>{{ post.geoloc }}</td>
+            <td>{{ post.datePosts ? post.datePosts|date('Y-m-d') : '' }}</td>
+            <td>
+                <a href="{{ path('posts_show', {'id': post.id}) }}">show</a>
+                <a href="{{ path('posts_edit', {'id': post.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">no records found</td>
+        </tr>
+        {% endfor %} #}
     </section>
 </main>
 {% endblock %}

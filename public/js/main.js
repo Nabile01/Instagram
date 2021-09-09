@@ -7,6 +7,7 @@ var disr = window.getComputedStyle(document.querySelector('#panel'), ':after');
 
 profileIcon.addEventListener('click', function () {
     subMenu.classList.toggle("menuToggle");
+    profileIcon.classList.toggle("speechBubble");
 })
 
 document.addEventListener('click', function (event) {

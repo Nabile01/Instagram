@@ -106,6 +106,17 @@ a {
   cursor: pointer;
 }
 
+#panel .thumbnailBoxPanel {
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.speechBubble {
+  overflow: hidden;
+}
+
 #thumbnailMenu {
   background: url("../assets/menuSprite.svg") no-repeat -76px -16px;
   width: 16px;

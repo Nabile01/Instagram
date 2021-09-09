@@ -36,7 +36,15 @@
                         <a href="">
                             <div id="like"></div>
                         </a>
-                        <div id="panel">
+                        <div id="panel" class="speechBubble">
+                            <div class="thumbnailBoxPanel">
+                            {% if app.user.thumbnail %}
+                                <img id="panelThumbnail" height="22px" width="22px" src="../assets/thumbnails/{{ app.user.thumbnail }}"
+                                    alt="Photo de profil">
+                                {% else %}
+                                <img id="panelThumbnail" height="22px" width="22px" src="{{ asset('/assets/defaultThumbnail.jpg') }}" alt="Photo de profil par défaut">
+                            {% endif %}
+                            </div>
                             <div id="panelMenu" class="menuToggle" >
                                 <a href="" class="profil"><div id="thumbnailMenu"></div>Profil</a>
                                 <a href="" class="checkedIn"><div id="checkedIn"></div>Enregistré</a>

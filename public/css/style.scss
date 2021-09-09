@@ -102,6 +102,17 @@ a {
 	width: 23px;
 	height: 23px;
 	cursor: pointer;
+
+	.thumbnailBoxPanel {
+		height: 22px;
+		width: 22px;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+}
+
+.speechBubble {
+	overflow: hidden;
 }
 
 #thumbnailMenu {
