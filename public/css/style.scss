@@ -883,6 +883,14 @@ main.panel {
 				h3 {
 					font-size: 16px;
 					margin-top: 10px;
+					font-weight: normal;
+				}
+
+				div {
+					margin-top: 20px;
+					a:first-child {
+						margin-right: 5px;
+					}
 				}
 			}
 		}

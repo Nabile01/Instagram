@@ -864,4 +864,13 @@ main.panel section.userPosts div.defaultPost div h2 {
 main.panel section.userPosts div.defaultPost div h3 {
   font-size: 16px;
   margin-top: 10px;
+  font-weight: normal;
+}
+
+main.panel section.userPosts div.defaultPost div div {
+  margin-top: 20px;
+}
+
+main.panel section.userPosts div.defaultPost div div a:first-child {
+  margin-right: 5px;
 }
