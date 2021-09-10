@@ -90,14 +90,19 @@ if(gear) {
     }) 
 }
 
-if(thumbnailModal || cancelBtn) {
-    thumbnailModal.addEventListener('click', closeModal);
+if(cancelBtn) {
     cancelBtn.addEventListener('click', closeModal);
     settingModal.addEventListener('click', closeModal);
 }
 
+if(thumbnailModal) {
+    thumbnailModal.addEventListener('click', closeModal);
+}
+
 function closeModal() {
-    thumbnailModal.style.display = 'none';
+    if(thumbnailModal) {
+        thumbnailModal.style.display = 'none';
+    }
     settingModal.style.display = 'none';
 }
 

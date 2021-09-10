@@ -874,3 +874,16 @@ main.panel section.userPosts div.defaultPost div div {
 main.panel section.userPosts div.defaultPost div div a:first-child {
   margin-right: 5px;
 }
+
+main.panel section.userPosts .postContainer {
+  display: grid;
+  grid-template-columns: 293px 293px 293px;
+  grid-template-rows: 293px;
+  gap: 28px 28px;
+  overflow: hidden;
+}
+
+main.panel section.userPosts .postContainer .postBox {
+  background-color: black;
+  text-align: center;
+}

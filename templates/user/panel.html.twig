@@ -7,7 +7,7 @@
     <section class="userPanel">
         <label for="thumbnail_thumbnail">
             <div class="thumbnailWrapper">
-                {% if app.user.thumbnail %}
+                {% if user.thumbnail %}
                 <img id="userThumbnail" src="../assets/thumbnails/{{ app.user.thumbnail }}"
                     alt="Ajouter une photo de profil">
                 {% else %}
@@ -57,14 +57,15 @@
     <section class="userPosts">
         <div class="postWrapper">
             {% if post %}
-            {% for posts in post %}
-            <div class="postWrapper">
-                {% for img in posts.media %}
-                <img alt="Image de publication" src="../assets/medias/{{ img.url }}">
+            <div class="postContainer">
+                {% for posts in post %}
+                    <div class="postBox">
+                        {% for img in posts.media %}
+                        <img alt="Image de publication" src="../assets/medias/{{ img.url }}">
+                        {% endfor %}
+                    </div>
                 {% endfor %}
-                <p>{{ posts.description }}</p>
             </div>
-            {% endfor %}
             {% else %}
             <div class="defaultpostWrapper">
                     <img height="380px" width="380px" src="{{ asset('/assets/defaultpost.jpg') }}"
@@ -83,10 +84,7 @@
             {% endif %}
         </div>
     </section>
-
-
-
-
+    
     {# --------------- MODAL #}
     {% if user.thumbnail %}
     <div class="overlay" id="thumbnailModal">

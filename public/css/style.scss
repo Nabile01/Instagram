@@ -894,5 +894,19 @@ main.panel {
 				}
 			}
 		}
+
+		//------POST GALLERIE
+		.postContainer{
+			display: grid; 
+			grid-template-columns: 293px 293px 293px; 
+			grid-template-rows: 293px; 
+			gap: 28px 28px;
+			overflow: hidden;
+		
+			.postBox {
+				background-color: black;
+				text-align: center;
+			}
+		}
 	}
 }
