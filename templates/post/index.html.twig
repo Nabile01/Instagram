@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section class="home">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for post in posts %}
+    <div class="postWrapper">
+        <a href="">{{ post.user.username }}</a>
+        <p>{{ post.description }}</p>
+        <p>{{ post.createdAt | date('Y-m-d') }}</p>
+        <a href="">Afficher les commentlengt commentaires</a>
+        {% set difference = date(post.createdAt).diff(date('now')) %}
+        {% set leftDays = difference.days %}
+        {% if leftDays == 1 %}
+            <a href="">Il y'a 1 jour</a>
+        {% else %}
+        <a href="">Il y'a {{ leftDays }} jours</a>
+        {% endif %}
+    </div>
+    {% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/Exercices/Instagram/src/Controller/PostController.php'|file_link(0) }}">src/Controller/PostController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/Exercices/Instagram/templates/post/index.html.twig'|file_link(0) }}">templates/post/index.html.twig</a></code></li>
-    </ul>
-</div>
+</section>
 {% endblock %}
