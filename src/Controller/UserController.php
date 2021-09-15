@@ -152,7 +152,6 @@ class UserController extends AbstractController
                     $newFilename,
                 )
             ;
-
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
