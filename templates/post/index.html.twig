@@ -10,17 +10,25 @@
         <img src="../assets/medias/{{ allMedia.url }}" alt="">
         {% endfor %}
         <p>{{ post.description }}</p>
-        {{ dump(post) }}
         <p>{{ post.createdAt | date('Y-m-d') }}</p>
         <a href="">Afficher les commentlengt commentaires</a>
         {% set difference = date(post.createdAt).diff(date('now')) %}
         {% set leftDays = difference.days %}
-        {% if leftDays == 0 %}
-        <a href="">Aujourd'hui</a>
-        {% elseif leftDays == 1 %}
-        <a href="">Il y'a 1 jour</a>
-        {% else %}
-        <a href="">Il y'a {{ leftDays }} jours</a>
+        {% if leftDays == 0 and difference.h > 0 %}
+            <a href="">Il y'a {{ difference.h }} heures </a>
+        {% endif %}
+        {% if leftDays == 0 and difference.h == 0 and difference.i > 0 %}
+            <a href="">Il y'a {{ difference.i }} minutes </a>
+        {% endif %}
+        {% if leftDays == 0 and difference.h == 0 and difference.i == 0 %}
+            <a href="">Il y'a {{ difference.s }} secondes </a>
+        {% endif %}
+        {% if leftDays == 1 %}
+                <a  href="">Il y'a 1 jour</a>
+            {% elseif leftDays > 1 and leftDays <= 6 %} 
+                <a href="">Il y'a {{ leftDays }} jours</a>
+            {% elseif leftDays > 6 %} 
+                <a href="">{{post.publication_date|date('j F' )}} </a>   
         {% endif %}
     </div>
     {% endfor %}
