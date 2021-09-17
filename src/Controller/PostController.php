@@ -115,4 +115,19 @@ class PostController extends AbstractController
             'likes' => $likeRepository->count(['id_post' => $post])
         ], 200);
     }
+
+
+    /**
+     * Affiche le formulaire d'ajout des posts
+     *
+     * @Route("/post/new", name="add_post")
+     * 
+     * @param Post $post
+     * @return void
+     */
+    public function createPost(Post $post) {
+        return $this->render('post/postForm.html.twig', [
+            'post' => $post
+        ]);
+    }
 }

@@ -132,6 +132,11 @@ div.likeRed {
 	height: 12px;
 }
 
+#addPost {
+	background: url('../assets/IconSprite2.png') no-repeat 0 -499px;
+	width: 23px;
+	height: 23px;
+}
 
 //----------paneluser
 #panel {
@@ -926,4 +931,60 @@ main.panel {
 //----------MAIN HOME
 main.home{
 	margin-top: 60px;
+
+	section.postFlow {
+		div.plane {
+			background: url('../assets/IconSprite2.png') no-repeat -312px -448px;
+			width: 24px;
+			height: 21px;
+		}
+		
+		div.bubble {
+			background: url('../assets/IconSprite2.png') no-repeat -208px -447px;
+			width: 24px;
+			height: 24px;
+		}
+
+		div.triplePoint {
+			background: url('../assets/IconSprite2.png') no-repeat -524px -483px;
+			width: 15px;
+			height: 3px;
+			cursor: pointer;
+		}
+
+		div.savedPostIcon {
+			background: url('../assets/IconSprite2.png') no-repeat -263px -499px;
+			width: 19px;
+			height: 24px;
+		}
+
+		article.postWrapper {
+			border: 1px solid #dbdbdb;
+			width: 614px;
+
+			.post_userThumbnail {
+				border-radius: 50%;
+			}
+
+			.post_header {
+				div{
+					display: flex;
+					align-items: center;
+					padding: 0px 16px;
+					a {
+						margin-left: 10px;
+					}
+				}
+				height: 60px;
+				background-color: white;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				div.triplePoint {
+					padding: 0px 16px;
+				}
+			}
+		}
+	}
 }

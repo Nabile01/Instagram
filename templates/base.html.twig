@@ -24,6 +24,9 @@
                     </a>
                     <input type="search" placeholder="Rechercher">
                     <div class="iconMenu">
+                        <a href="{{ path('add_post') }}">
+                            <div id="addPost"></div>
+                        </a>
                         <a href="{{ path('post', {'username': app.user.username}) }}">
                             <div id="home"></div>
                         </a>
