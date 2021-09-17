@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Like;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Repository\FollowersRepository;
+use App\Repository\LikeRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -19,22 +21,26 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/post/{username}", name="post", methods={"GET","POST"})
+     * @Route("/home/{username}", name="post", methods={"GET","POST"})
      */
-    public function showUserPost(SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository, User $user,Request $request, UserRepository $userRepository, PostRepository $postRepository, AuthenticationUtils $authenticationUtils, SubscriptionRepository $subscriptionRepo): Response
+    public function showUserPost(SubscriptionRepository $subscriptionRepository, FollowersRepository $followersRepository, User $user, Request $request, UserRepository $userRepository, PostRepository $postRepository, AuthenticationUtils $authenticationUtils, SubscriptionRepository $subscriptionRepo): Response
     {
         $currentUsername = $request->attributes->get('username');
-        $currentUserId= $userRepository->findOneBy(['username'=> $currentUsername]);
+        $currentUserId = $userRepository->findOneBy(['username' => $currentUsername]);
         $test = $subscriptionRepository->findBy(['user' => $currentUserId]);
-        foreach($test as $sub) {
+        foreach ($test as $sub) {
             $idsub[] = $sub->getIdUser();
         }
 
-        if ($this->getUser()) {
+        if ($this->getUser() && !empty($idsub)) {
             return $this->render('post/index.html.twig', [
-                'posts' => $postRepository->findBy(['user'=>$idsub]),
-                'subscription' => $subscriptionRepository->findBy(['id_user' =>$currentUserId]),
-                'follower' => $followersRepository->findBy(['id_user' =>$currentUserId]),
+                'posts' => $postRepository->findBy(['user' => $idsub]),
+                'subscription' => $subscriptionRepository->findBy(['id_user' => $currentUserId]),
+                'follower' => $followersRepository->findBy(['id_user' => $currentUserId]),
+            ]);
+        } else {
+            return $this->render('post/index.html.twig', [
+                'posts' => null,
             ]);
         }
 
@@ -58,18 +64,55 @@ class PostController extends AbstractController
     }
 
     /**
-     * Permet de savoir si cet article est liké par un user
+     * Permet de liker ou unliker un article
      *
-     * @param User $user
-     * @return boolean
+     * @Route("/post/{id}/like", name="post_like")
+     * 
+     * @param Post $post
+     * @param ObjectManager $manager
+     * @param LikeRepository $likeRepository
+     * @return Response
      */
-    public function isLikedByUser(User $user): bool
+    public function like(Post $post, LikeRepository $likeRepository): Response
     {
-        foreach ($this->likes as $like) {
-            if ($like->getUser() === $user) {
-                return true;
-            }
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->json([
+                'code' => 403,
+                'message' => "Unauthorized"
+            ], 403);
         }
-        return false;
+
+        if ($post->isLikedByUser($user)) {
+            $like = $likeRepository->findOneBy([
+                'id_post' => $post,
+                'id_user' => $user
+            ]);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($like);
+            $entityManager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'like bien supprimé',
+                'likes' => $likeRepository->count(['id_post' => $post])
+            ], 200);
+        }
+
+        $like = new Like();
+        $like->setIdPost($post)
+            ->setIdUser($user);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($like);
+        $entityManager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'like bien ajouté',
+            'likes' => $likeRepository->count(['id_post' => $post])
+        ], 200);
     }
 }

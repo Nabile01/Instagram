@@ -125,6 +125,11 @@ class User implements UserInterface
      */
     private $dob;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="id_user", orphanRemoval=true)
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
@@ -132,6 +137,7 @@ class User implements UserInterface
         $this->saved_post = new ArrayCollection();
         $this->subscription = new ArrayCollection();
         $this->registrationDate = new \DateTime('now');
+        $this->likes = new ArrayCollection();
     }
 
     public function getSalt()
@@ -451,6 +457,36 @@ class User implements UserInterface
     public function setDob(\DateTimeInterface $dob): self
     {
         $this->dob = $dob;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getIdUser() === $this) {
+                $like->setIdUser(null);
+            }
+        }
 
         return $this;
     }

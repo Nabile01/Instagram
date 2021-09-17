@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Like;
+use App\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PostRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -59,9 +61,15 @@ class Post
      */
     private $media;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="id_post", orphanRemoval=true)
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,5 +189,51 @@ class Post
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setIdPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getIdPost() === $this) {
+                $like->setIdPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Permet de savoir si cet article est liké par un user
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getIdUser() === $user) {
+                return true;
+            }
+        }
+        return false;
     }
 }

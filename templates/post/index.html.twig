@@ -1,39 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% if app.user %}
-<section class="home">
-    {% for post in posts %}
-    <div class="postWrapper">
-        <a href="">{{ post.user.username }}</a>
-        {% for allMedia in post.media %}
-        <img src="../assets/medias/{{ allMedia.url }}" alt="">
-        {% endfor %}
-        <p>{{ post.description }}</p>
-        <p>{{ post.createdAt | date('Y-m-d') }}</p>
-        <a href="">Afficher les commentlengt commentaires</a>
-        {% set difference = date(post.createdAt).diff(date('now')) %}
-        {% set leftDays = difference.days %}
-        {% if leftDays == 0 and difference.h > 0 %}
-            <a href="">Il y'a {{ difference.h }} heures </a>
-        {% endif %}
-        {% if leftDays == 0 and difference.h == 0 and difference.i > 0 %}
-            <a href="">Il y'a {{ difference.i }} minutes </a>
-        {% endif %}
-        {% if leftDays == 0 and difference.h == 0 and difference.i == 0 %}
-            <a href="">Il y'a {{ difference.s }} secondes </a>
-        {% endif %}
-        {% if leftDays == 1 %}
-                <a  href="">Il y'a 1 jour</a>
-            {% elseif leftDays > 1 and leftDays <= 6 %} 
-                <a href="">Il y'a {{ leftDays }} jours</a>
-            {% elseif leftDays > 6 %} 
-                <a href="">{{post.publication_date|date('j F' )}} </a>   
-        {% endif %}
-    </div>
-    {% endfor %}
-</section>
-{% else %}
+<main class="home">
+    {% if app.user %}
+        {% if posts == null %}
+            <section class="postFlowNoSub">
+                <p>COUCOU</p>
+            </section>
+        {% else %}
+        <section class="postFlow">
+            {% for post in posts %}
+                <div class="postWrapper">
+                    <a href="">{{ post.user.username }}</a>
+                    {% for allMedia in post.media %}
+                        <img src="../assets/medias/{{ allMedia.url }}" alt="">
+                    {% endfor %}
+                    <p>{{ post.description }}</p>
+                    <p>{{ post.createdAt | date('Y-m-d') }}</p>
+                    <a href="">Afficher les commentlengt commentaires</a>
+                    {% set difference = date(post.createdAt).diff(date('now')) %}
+                    {% set leftDays = difference.days %}
+                    {% if leftDays == 0 and difference.h > 0 %}
+                        <a href="">Il y'a {{ difference.h }} heures </a>
+                    {% endif %}
+                    {% if leftDays == 0 and difference.h == 0 and difference.i > 0 %}
+                        <a href="">Il y'a {{ difference.i }} minutes </a>
+                    {% endif %}
+                    {% if leftDays == 0 and difference.h == 0 and difference.i == 0 %}
+                        <a href="">Il y'a {{ difference.s }} secondes </a>
+                    {% endif %}
+                    {% if leftDays == 1 %}
+                        <a href="">Il y'a 1 jour</a>
+                    {% elseif leftDays > 1 and leftDays <= 6 %} <a href="">Il y'a {{ leftDays }} jours</a>
+                        {% elseif leftDays > 6 %}
+                            <a href="">{{post.publication_date|date('j F' )}} </a>
+                        {% endif %}
 
-{% endif %}
+                        <a href="{{ path('post_like', {'id':post.id}) }}" class="js-like">
+                            {% if app.user and post.isLikedByUser(app.user) %}
+                                <div class="likeRed likeIcon"></div>
+                            {% else %}
+                                <div class="likeWhite likeIcon"></div>
+                            {% endif %}
+                            <span class="js-likes">{{ post.likes|length }}</span>
+                        </a>
+                        <span class="js-label">J'aime</span>
+                </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+    {% endif %}
+</main>
+ 
+<script src="{{ asset('/js/ajax.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 {% endblock %}
